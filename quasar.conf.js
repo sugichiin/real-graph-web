@@ -86,7 +86,8 @@ module.exports = function (ctx) {
         'QInnerLoading',
         'QCardSection',
         'QSlider',
-        'QRange'
+        'QRange',
+        'QDialog'
       ],
 
       directives: [

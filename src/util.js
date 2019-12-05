@@ -52,6 +52,8 @@ export function downloadDataUrl (url, fileName) {
   aElement.click()
 }
 
+export const downloadUrl = downloadDataUrl
+
 class WSocket {
   sessId
   socket

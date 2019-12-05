@@ -86,7 +86,7 @@
         this.state = 'uploading'
         this.$http.post('/upload2', formData).then((res) => {
           this.state = 'ready'
-          alert('업로드에 성공했습니다.')
+          alert('Dataset has been successfully uploaded.')
           this.file = null
           document.querySelector('input[type="file"]').value = ''
         })

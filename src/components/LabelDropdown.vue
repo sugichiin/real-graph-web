@@ -15,6 +15,11 @@
         <div class="menu-value">{{selectedItem.label}}</div>
         <div class="menu-caption text-white" v-for="caption in selectedItem.captions" :key="caption">{{caption}}</div>
       </div>
+      <q-btn style="margin-right:5px;" left dense round flat size="md" v-if="!selectedItem" :icon="defaultIcon">
+      </q-btn>
+      <div class="text-left" v-if="!selectedItem">
+        <div class="menu-value">Not selected</div>
+      </div>
     </div>
     <q-menu fit>
       <q-list>
@@ -38,7 +43,7 @@
 <script>
   export default {
     name: 'LabelDropdown',
-    props: ['value', 'options', 'color'],
+    props: ['value', 'options', 'color', 'defaultIcon'],
     methods: {
       onItemClick (item) {
         this.$emit('input', item.value)

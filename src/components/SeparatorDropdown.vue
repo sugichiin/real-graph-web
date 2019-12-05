@@ -1,5 +1,6 @@
 <template>
-  <q-btn no-caps :color="color || 'cyan'" push align="left" :icon="selectedItem.icon || selectedItem.parent.icon" class="full-width" :label="selectedItem.label">
+  <q-btn no-caps :color="color || 'cyan'" push align="left"
+         :icon="(selectedItem && (selectedItem.icon || selectedItem.parent.icon)) || defaultIcon" class="full-width" :label="(selectedItem && selectedItem.label) || 'Not selected'">
     <q-menu fit>
       <q-list>
         <div :key="item.label" v-for="(item, key, index) in options">
@@ -32,7 +33,8 @@
       options: Array,
       value: String,
       color: String,
-      objectValue: Boolean
+      objectValue: Boolean,
+      defaultIcon: String
     },
     methods: {
       onItemClick (option) {

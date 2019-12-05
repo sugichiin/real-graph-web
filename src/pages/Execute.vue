@@ -1,22 +1,23 @@
 <template>
   <q-page class="">
+    <!-- Configuration -->
     <div class="row">
       <div class="col-8">
         <div class="row">
           <div class="col-6">
             <span class="param">Dataset</span>
             <br>
-            <label-dropdown class="param-dropdown" color="cornflowerblue" @input="clear" :options="datasetOptions" @selected="datasetChanged"
+            <label-dropdown class="param-dropdown" default-icon="mdi-graphql" color="cornflowerblue" @input="clear" :options="datasetOptions" @selected="datasetChanged"
                             v-model="dataset"/>
           </div>
           <div class="col-6 param-section">
             <span class="param">Resources</span>
             <div class="row">
               <div class="col-6">
-                <label-dropdown class="param-dropdown" color="cornflowerblue" @input="clear" :options="threadOptions" v-model="threads"></label-dropdown>
+                <label-dropdown class="param-dropdown" default-icon="mdi-tilde" color="cornflowerblue" @input="clear" :options="threadOptions" v-model="threads"></label-dropdown>
               </div>
               <div class="col-6">
-                <label-dropdown class="param-dropdown" color="cornflowerblue" @input="clear" :options="memoryOptions" v-model="memory"></label-dropdown>
+                <label-dropdown class="param-dropdown" default-icon="memory" color="cornflowerblue" @input="clear" :options="memoryOptions" v-model="memory"></label-dropdown>
               </div>
             </div>
           </div>
@@ -25,7 +26,7 @@
           <div class="col-6">
             <span class="param">Algorithms</span>
             <br>
-            <separator-dropdown class="param-dropdown" color="cornflowerblue" @input="clear" :options="algorithms" @selected="algoChanged"
+            <separator-dropdown class="param-dropdown" default-icon="info" color="cornflowerblue" @input="clear" :options="algorithms" @selected="algoChanged"
                                 v-model="algorithm"></separator-dropdown>
           </div>
           <div class="col-6 param-section" v-if="algoItem && (algoItem.root || algoItem.maxiter)">
@@ -64,6 +65,7 @@
         </div>
       </div>
     </div>
+    <!-- 결과 -->
     <div class="row" style="margin-top:20px;">
       <q-card class="full-width" style="padding:10px;">
         <q-card-section style="padding:0;">
@@ -92,8 +94,12 @@
             </q-tabs>
             <q-separator key="separator"></q-separator>
             <div class="text-center" style="margin-top:10px;" v-if="(tabs === 'text' || tabs === 'table') && algoItem && state === 'success'">
-              <span class="text-h5" v-if="algoItem.parent.label === 'Rank'">Top-{{count}} {{this.algoItem.label}} of {{this.dataset}} Dataset</span>
-              <span class="text-h5" v-if="algoItem.parent.label !== 'Rank'">The {{this.algoItem.label}} result of {{this.dataset}} Dataset</span>
+              <span class="text-h5" v-if="algoItem.parent.label === 'Rank'">
+                Top-{{count}} {{this.algoItem.label}} of {{this.dataset}} Dataset
+              </span>
+              <span class="text-h5" v-if="algoItem.parent.label !== 'Rank'">
+                The {{this.algoItem.label}} result of {{this.dataset}} Dataset
+              </span>
             </div>
             <q-tab-panels key="qtabpanels" v-model="tabs" animated>
               <q-tab-panel name="text">
@@ -132,12 +138,13 @@
           </q-card-section>
         </transition>
         <q-inner-loading key="qinnerloading" :showing="state === 'running'">
+          <!-- 알고리즘 진행중 Progress Bar ( Max Iteration 이 정해진 경우 ) -->
           <q-circular-progress
             v-if="algoItem && algoItem.maxiter"
             :min="0"
             show-value
             :max="100"
-            :value="progress*100"
+            :value="progress * 100"
             size="100px"
             :thickness="0.22"
             color="teal"
@@ -145,6 +152,7 @@
             class="q-ma-md">
             {{Math.floor(progress*100)}}%
           </q-circular-progress>
+          <!-- Max Iteration 이 정해지지 않은 경우. -->
           <q-circular-progress
             v-if="algoItem && !algoItem.maxiter"
             indeterminate
@@ -159,11 +167,24 @@
         </q-inner-loading>
       </q-card>
     </div>
+    <q-dialog v-model="dialog.format" persistent>
+      <q-card>
+        <q-card-section class="row items-center">
+          <q-avatar icon="help"/>
+          <span class="q-ml-sm">Which format do you want?</span>
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="CSV" color="primary" @click="downloadFormat('csv')" v-close-popup />
+          <q-btn flat label="ARFF" color="primary" @click="downloadFormat('arff')" v-close-popup />
+          <q-btn flat label="Cancel" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
 <script>
-  import { algorithms, threads, memory, graph } from '../setting.json'
+  import { http, algorithms, threads, memory, graph } from '../setting.json'
   import LabelDropdown from '../components/LabelDropdown'
   import SeparatorDropdown from '../components/SeparatorDropdown'
   import { decodeBfs, downloadDataUrl, downloadText, formatNumber, readCsv, wSocket } from '../util'
@@ -336,7 +357,6 @@
       // 데이터셋들의 정보를 가져옵니다.
       this.$http.get('/data-list').then(res => {
         this.datasets = res
-        this.dataset = res[0].name
       })
       // 현재 알고리즘의 진행상태 정보가 넘어오는 경우
       wSocket.on('progress', data => {
@@ -382,21 +402,44 @@
         this.algoItem = item
       },
       run () {
-        const { maxiter, memory, threads, algorithm, dataset, root } = this
-
+        const { maxiter, memory, threads, algorithm, dataset, root, algoItem, fun1, fun2, fun3 } = this
+        if (dataset === '') {
+          alert('Please select the dataset')
+          return
+        } else if (memory === 0) {
+          alert('Please select memory')
+          return
+        } else if (threads === 0) {
+          alert('Please select the number of threads')
+          return
+        } else if (algorithm === '') {
+          alert('Please select the algorithm to execute')
+          return
+        } else if (algoItem.root && root === '') {
+          alert('Please input the root (start node).')
+          return
+        } else if (algoItem.maxiter && maxiter === '') {
+          alert('Please input the number of iteration to run')
+          return
+        }
         this.state = 'running'
+        // 실시간 통신을 위하여 Web Socket 을 사용합니다.
         wSocket.emit('run', {
           maxiter: maxiter || 20,
-          memory,
+          memory, // memory: memory 랑 같음.
           threads,
-          root: root || 1,
+          root: root,
           data: dataset,
           algo: algorithm,
           count: 40,
-          sessId: wSocket.sessId
+          sessId: wSocket.sessId,
+          fun1,
+          fun2,
+          fun3
         })
       },
       stop () {
+        wSocket.emit('stop')
         this.state = 'ready'
       },
       clear () {
@@ -411,28 +454,44 @@
           decoded: []
         }
       },
+      downloadFormat (format) {
+        if (format === 'csv') {
+          downloadDataUrl(`${process.env.NODE_ENV === 'production' ? http.production.baseURL : http.dev.baseURL}result/result.csv`, 'result.csv')
+        } else if (format === 'arff') {
+          downloadDataUrl(`${process.env.NODE_ENV === 'production' ? http.production.baseURL : http.dev.baseURL}result/result.arff`, 'result.arff')
+        }
+      },
       download () {
         if (this.tabs === 'text' || this.tabs === 'table') {
-          downloadText(this.result.text, 'result.csv')
+          if (this.datasetItem.badge === 'S' && this.chartType === 'hist') {
+            this.dialog.format = true
+          } else {
+            downloadText(this.result.text, 'result.csv')
+          }
         } else if (this.tabs === 'chart') {
           downloadDataUrl(this.$refs.hist.dataUrl(), 'result.jpg')
         } else if (this.tabs === 'graph') {
           this.$refs.graph.download()
+        } else {
+          downloadText(this.result.text, 'result.csv')
         }
       }
     },
     data: function () {
       return {
         // 현재 선택한 데이터 셋
-        dataset: 'Mock',
+        dataset: '',
         // 현재 선택한 데이터 셋의 정보 (노드 수, 엣지 수)
         datasetItem: null,
+        dialog: {
+          format: false
+        },
         // 현재 선택한 메모리 (GB 단위)
-        memory: 4,
+        memory: 0,
         // 현재 선택한 쓰레드
-        threads: 1,
+        threads: 0,
         // 현재 선택한 알고리즘
-        algorithm: 'pr',
+        algorithm: '',
         // 현재 선택한 알고리즘의 정보
         algoItem: null,
         // 선택 가능한 알고리즘들의 정보
