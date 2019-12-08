@@ -66,7 +66,7 @@ Javascript의 새로운 버전인 ES6를 사용하였으므로 기존에 jQuery�
 
 **Vue**파일은 다음과 같은 형태를 띄고 있습니다.
 
-```javascript
+```html
 <template>
   <!-- HTML 내용 -->
   <div>
@@ -97,14 +97,17 @@ Javascript의 새로운 버전인 ES6를 사용하였으므로 기존에 jQuery�
        className: 'test'
      }
    },
-   method () {
+   methods: {
      // 컴포넌트의 함수들
-   },
-   mounted () {
-     // 컴포넌트가 만들어졌을 때 수행되는 함수
      clickEvent () {
        
      }
+   },
+   mounted () {
+     // 컴포넌트가 만들어졌을 때 수행되는 함수
+   },
+   destroyed () {
+     // 컴포넌트가 제거될 때 수행되는 함수
    },
    computed () {
      // 저절로 연산되는 데이터 값들. 함수로 선언하고, 변수형태로 사용할 수 있다.
@@ -155,7 +158,7 @@ npm run build && npm run deploy
 
 배포를 위한 설정은 **deploy.json**을 통하여 설정할 수 있습니다.
 
-```json
+```javascript
 {
   "host": "ssh 호스트이름",
   "username": "ssh id",
@@ -167,7 +170,7 @@ npm run build && npm run deploy
 ```
 
 ## setting.json 명세
-```json
+```javascript
 {
   "http": {
     "dev": { // 개발 모드 설정
@@ -236,7 +239,21 @@ npm run build && npm run deploy
 }
 ```
 
-## Reference
+# 결과 파일
+서버에서 알고리즘이 수행이 되면, 결과 파일들이 생성되고 이에 따른 처리과정이 있습니다.
+
+| 파일 | 설명 |
+| --- | --- |
+| 데이터셋_val.csv | 그래프의 크기가 작을 때 (node < 300000) 생성되는 파일로써, 모든 노드에 대한 값들 (PageRank, HITS, RWR, In/Out Degree 등) 이 저장되어 있습니다. 또한 이 파일을 가지고 각 노드들의 상대적인 size를 측정합니다. **update_val.py** 참조 |
+| 데이터셋_text.csv | TEXT,TABLE 탭에 뜨게되는 결과 파일. 탭을 구분자로 합니다. |
+| 데이터셋_community.csv | WCC나 LPA 알고리즘 같은 커뮤니티가 바뀌는 알고리즘에서 출력되는 파일로, 모든 노드의 커뮤니티 값이 저장되어 있습니다. |
+| 데이터셋_dist.csv | 모든 노드에 대한 값들의 Histogram 데이터를 저장하고 있습니다. Chart 탭에서 사용합니다. |
+| 데이터셋_path.csv | BFS 같은 알고리즘에서 경로 정보를 저장하고 있는 파일입니다. 각 행마다 iteration,시작노드,시작노드와 연결되는 다음 노드들이 탭을 구분자로 하여 저장되어 있습니다. |
+
+## 
+
+
+# Reference
 - [Vue.js 가이드](https://kr.vuejs.org/v2/guide/index.html)
 - [Quasar 가이드](https://quasar.dev/)
 - [ES5 to ES6](https://ui.toast.com/fe-guide/ko_ES5-TO-ES6/)
