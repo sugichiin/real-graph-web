@@ -12,6 +12,7 @@
 
 <script>
   import marked from 'marked'
+  import { ajax } from '../util'
   export default {
     name: 'Tutorial',
     data () {
@@ -20,8 +21,7 @@
       }
     },
     mounted () {
-      fetch('/statics/tutorial.md')
-        .then(res => res.text())
+      ajax.get('/statics/tutorial.md')
         .then(res => {
           this.markdownHtml = marked(res)
         })

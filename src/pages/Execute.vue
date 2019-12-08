@@ -167,6 +167,8 @@
         </q-inner-loading>
       </q-card>
     </div>
+
+    <!-- 다운로드 Modal -->
     <q-dialog v-model="dialog.format" persistent>
       <q-card>
         <q-card-section class="row items-center">
@@ -175,6 +177,7 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="CSV" color="primary" @click="downloadFormat('csv')" v-close-popup />
+          <q-btn flat label="Binary" color="primary" @click="downloadFormat('bin')" v-close-popup />
           <q-btn flat label="ARFF" color="primary" @click="downloadFormat('arff')" v-close-popup />
           <q-btn flat label="Cancel" color="primary" v-close-popup />
         </q-card-actions>
@@ -205,7 +208,7 @@
     },
     computed: {
       chartTitle () {
-        if (this.algoItem && this.algoItem.chart === 'hist') {
+        if (this.algoItem && this.chartType === 'hist') {
           return `${this.algoItem.label} Distribution of ${this.dataset} Dataset`
         }
         return ''
@@ -272,7 +275,7 @@
           option.nodeColorMap = nodeColorMap
         }
         if (size) {
-          if (this.algorithm === 'hits') {
+          if (size.community) {
             const community = size.community
             option.communityMap = community
             const nodes = new Set(Object.keys(size.size_hub).concat(Object.keys(size.size_auth)))
@@ -445,6 +448,8 @@
       clear () {
         this.state = 'ready'
         this.tabs = 'text'
+        this.maxiter = ''
+        this.root = ''
         this.result = {
           text: ''
         }
@@ -459,6 +464,8 @@
           downloadDataUrl(`${process.env.NODE_ENV === 'production' ? http.production.baseURL : http.dev.baseURL}result/result.csv`, 'result.csv')
         } else if (format === 'arff') {
           downloadDataUrl(`${process.env.NODE_ENV === 'production' ? http.production.baseURL : http.dev.baseURL}result/result.arff`, 'result.arff')
+        } else if (format === 'bin') {
+          downloadDataUrl(`${process.env.NODE_ENV === 'production' ? http.production.baseURL : http.dev.baseURL}result/result.dat`, 'result.dat')
         }
       },
       download () {
@@ -502,7 +509,6 @@
         tabs: 'text',
         // 알고리즘 수행 시 진행 상태
         progress: 0,
-        count: 40,
         maxZoom: 0,
         result: {
           text: ''

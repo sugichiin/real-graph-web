@@ -1,6 +1,7 @@
 import { http } from './setting.json'
 import io from 'socket.io-client'
 import 'canvg'
+import axios from 'axios'
 export function formatNumber (num) {
   let s = String(num)
   const reg = /(^[+-]?\d+)(\d{3})/
@@ -57,14 +58,11 @@ export const downloadUrl = downloadDataUrl
 class WSocket {
   sessId
   socket
-  resultFn
   constructor () {
     this.sessId = ''
-    this.resultFn = () => {}
     this.socket = io(process.env.NODE_ENV === 'production' ? http.production.baseURL : http.dev.baseURL)
     this.generate()
     this.socket.on('regenerate', () => this.generate())
-    this.socket.on('result', (...args) => this.resultFn(...args))
   }
   once (name, eventListener) {
     this.socket.once(name, eventListener)
@@ -108,4 +106,17 @@ export function decodeBfs (path) {
     }
   })
   return iters
+}
+
+const $ajax = axios.create({
+  baseURL: process.env.NODE_ENV === 'production' ? http.production.baseURL : http.dev.baseURL,
+  timeout: 600000
+})
+export const ajax = {
+  get (url) {
+    return $ajax.get(url).then(res => res.data)
+  },
+  post (url, data) {
+    return $ajax.post(url, data).then(res => res.data)
+  }
 }

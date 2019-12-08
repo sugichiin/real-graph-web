@@ -50,10 +50,9 @@ function shingleInfoPanel(settings) {
 		this.attrs = {};
 
 		mainNode.innerHTML = "";
-		relatedNodes.innerHTML = "";
+		relatedNodes.innerHTML = "<hr/>";
 		nodePages.innerHTML = "";
 		edgeInfo.innerHTML = "";
-    relatedNodes.append($('<hr/>'))
 	};
 
 	this.hoverIn = function () { };
