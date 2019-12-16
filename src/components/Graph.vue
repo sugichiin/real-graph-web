@@ -35,16 +35,18 @@
             }
           },
           onFocus: (quadid, nodeid, infoData) => {
-            const algo = this.algoItem.graph.name
-            const filter = this.filter
-            wSocket.once('attr', ({ values }) => {
-              const attr = {}
-              algo.forEach((name, index) => {
-                attr[name] = values[index]
+            if (this.algoItem.graph) {
+              const algo = this.algoItem.graph.name
+              const filter = this.filter
+              wSocket.once('attr', ({ values }) => {
+                const attr = {}
+                algo.forEach((name, index) => {
+                  attr[name] = values[index]
+                })
+                infoData.setAttr(attr, filter)
               })
-              infoData.setAttr(attr, filter)
-            })
-            wSocket.emit('attr', nodeid)
+              wSocket.emit('attr', nodeid)
+            }
           },
           options: {
             zoomSlider: false,

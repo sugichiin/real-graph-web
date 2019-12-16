@@ -34,6 +34,7 @@ window.initialize = (function ($) {
         var quad = null;
         var pos = null;
         var lastUpdate;
+        // 값이 크면 클수록 노드의 크기가 커집니다.
         var dataSetScale = {
             'Stanford': 1.0 / 50,
             'Facebook': 1.0 / 1500,
@@ -41,10 +42,12 @@ window.initialize = (function ($) {
             'wiki-Vote': 1.0 / 2000,
             'Epinion': 1.0 / 400
         }
+        // 0.0 -> 다 뜨게 되어 있음
+        // 값이 높으면 높을 수록 덜 뜹니다.
         var thresholds = {
             'Mers' : 0.0,
             'Stanford' : 0.1,
-            'Facebook' : 0.1,
+            'Facebook' : 0.0,
             'wiki-Vote': 0.1,
             'Epinion': 0.05
         }

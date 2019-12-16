@@ -77,7 +77,7 @@
     methods: {
       upload () {
         if (this.file === null) {
-          alert('파일을 선택해주세요.')
+          alert('Please choose your file to upload.')
           return
         }
         const formData = new FormData()

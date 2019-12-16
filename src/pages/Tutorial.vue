@@ -1,10 +1,8 @@
 <template>
   <q-page>
     <div class="tutorial">
-      <!--
       <iframe allowfullscreen="" frameborder="0" height="547"
               marginheight="0" marginwidth="0" scrolling="no" src="https://www.slideshare.net/slideshow/embed_code/key/9V8wZi2CqduhfB" width="900"></iframe>
-              -->
     </div>
     <div class="markdown" v-html="markdownHtml"></div>
   </q-page>

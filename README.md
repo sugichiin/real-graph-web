@@ -250,8 +250,54 @@ npm run build && npm run deploy
 | 데이터셋_dist.csv | 모든 노드에 대한 값들의 Histogram 데이터를 저장하고 있습니다. Chart 탭에서 사용합니다. |
 | 데이터셋_path.csv | BFS 같은 알고리즘에서 경로 정보를 저장하고 있는 파일입니다. 각 행마다 iteration,시작노드,시작노드와 연결되는 다음 노드들이 탭을 구분자로 하여 저장되어 있습니다. |
 
-## 
 
+
+# shinglejs 전처리
+## 준비물
+기본적으로 그래프를 업로드 해도 shinglejs 모듈에 대한 전처리는 자동으로 되지 않습니다. 따라서 작은 그래프는 업로드 후 전처리를 필요로합니다.
+
+전처리 같은 경우 다음과 같은 준비물이 필요합니다 (서버에 있는 platform 폴더에  업로드 해주세요.)
+- 데이터 셋(사이트에 업로드 했던 txt파일)
+- gexf 파일 (Gephi 를 이용하여 ForceAtalas 알고리즘을 돌리고 *.gexf 포맷으로 export)
+
+## 전처리 수행
+
+준비물을 platform 폴더에 업로드를 완료 했다면, 아래와 같이 **gexf.sh**를 실행시켜주세요
+
+```bash
+# width 와 height은 적당한 값으로 맞춰주세요. (예: 1000, 1000)
+sudo sh gexf.sh "데이터셋이름" "gexf파일" "데이터셋파일" "width" "height" 
+```
+
+## 그래프 조정
+
+전처리 수행 후 직접 웹사이트에서 렌더링 되는 모습을 보고, 약간의 조정 작업을 필요로 합니다.
+
+**src/static/visualize.js** 파일에서 **dataSetScale** 과 **thresholds** 를 수정해주세요.
+
+dataSetScale 같은 경우 노드의 크기, thresholds는 화면에서 뜨는 노드의 최대수를 결정합니다.
+
+dataSetScale은 크면 클수록 노드는 커지고, thresholds는 작으면 작을 수록 많이 뜨게됩니다.
+
+```javascript
+        // 값이 크면 클수록 노드의 크기가 커집니다.
+        var dataSetScale = {
+            'Stanford': 1.0 / 50,
+            'Facebook': 1.0 / 1500,
+            'Mers': 1.0 / 2000,
+            'wiki-Vote': 1.0 / 2000,
+            'Epinion': 1.0 / 400
+        }
+        // 0.0 -> 다 뜨게 되어 있음
+        // 값이 높으면 높을 수록 덜 뜹니다.
+        var thresholds = {
+            'Mers' : 0.0,
+            'Stanford' : 0.1,
+            'Facebook' : 0.0,
+            'wiki-Vote': 0.1,
+            'Epinion': 0.05
+        }
+```
 
 # Reference
 - [Vue.js 가이드](https://kr.vuejs.org/v2/guide/index.html)
