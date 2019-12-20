@@ -30,8 +30,13 @@ sudo pm2 stop 서비스이름
 | platform/ | 알고리즘 소스코드, 실행결과 등등이 들어 있는 폴더 |
 | platform/alg/ | 알고리즘 소스코드 |
 | platform/run2.sh | 알고리즘이 수행되는 쉘 코드 |
-| platform/update_val.py | 알고리즘이 모두 수행된 후, 그래프 노드 사이즈를 값에 따라 normalize 하여 json으로 변환하는 스크립트. |
-| platform/update_attr.py | update_val.py 와 같은 기능을 하나 20081 서버 전용 |
+| platform/gexf.sh | gexf 파일과 adjlist csv파일을 가지고 shinglejs 전처리를 수행해주는 쉘 파일 |
+| platform/py/update_val.py | 알고리즘이 모두 수행된 후, 그래프 노드 사이즈를 값에 따라 normalize 하여 json으로 변환하는 스크립트. |
+| platform/gexf | gephi- force atlas2를 돌린 레이아웃 결과값 |
+| platform/py | 파이썬 스크립트 모음 |
+| platform/preprocessor | shinglejs 전처리 모듈 |
+| platform/adjlist | 올라가있는 adjlist csv파일 |
+| platform2/update_attr.py | update_val.py 와 같은 기능을 하나 20081 서버 전용 |
 | platform2/ | 20081서버 전용 소스코드 및 공통 엔진, 데이터 셋이 있는 폴더 |
 
 ## 화면 ( 프론트 )
