@@ -1,19 +1,19 @@
 <template>
   <q-page class="">
     <!-- Configuration -->
-    <div class="row">
-      <div class="col-8">
-        <div class="row">
-          <div class="col-6">
+    <div class="row q-my-sm">
+      <div class="col-8 q-pr-sm">
+        <div class="row q-py-sm">
+          <div class="col-6 q-pr-md">
             <span class="param">Dataset</span>
             <br>
-            <label-dropdown class="param-dropdown" default-icon="mdi-graphql" color="cornflowerblue" @input="clear" :options="datasetOptions" @selected="datasetChanged"
+            <label-dropdown class="param-dropdown q-mt-xs" default-icon="mdi-graphql" color="cornflowerblue" @input="clear" :options="datasetOptions" @selected="datasetChanged"
                             v-model="dataset"/>
           </div>
           <div class="col-6 param-section">
             <span class="param">Resources</span>
-            <div class="row">
-              <div class="col-6">
+            <div class="row q-mt-xs">
+              <div class="col-6 q-pr-sm">
                 <label-dropdown class="param-dropdown" default-icon="mdi-tilde" color="cornflowerblue" @input="clear" :options="threadOptions" v-model="threads"></label-dropdown>
               </div>
               <div class="col-6">
@@ -22,11 +22,11 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-6">
+        <div class="row q-pt-sm">
+          <div class="col-6 q-pr-md">
             <span class="param">Algorithms</span>
             <br>
-            <separator-dropdown class="param-dropdown" default-icon="info" color="cornflowerblue" @input="clear" :options="algorithms" @selected="algoChanged"
+            <separator-dropdown class="param-dropdown q-mt-xs" default-icon="info" color="cornflowerblue" @input="clear" :options="algorithms" @selected="algoChanged"
                                 v-model="algorithm"></separator-dropdown>
           </div>
           <div class="col-6 param-section" v-if="algoItem && (algoItem.root || algoItem.maxiter)">
@@ -42,9 +42,9 @@
           </div>
         </div>
       </div>
-      <div class="col-4" style="padding-left:5px;">
+      <div class="col-4 q-pl-md">
         <span class="param">Optimization</span>
-        <div>
+        <div class="q-my-sm">
           <q-toggle v-model="fun1" label="Block-based allocation"></q-toggle>
           <br>
           <q-toggle v-model="fun2" label="Hierarchical indicator"></q-toggle>
@@ -66,7 +66,7 @@
       </div>
     </div>
     <!-- 결과 -->
-    <div class="row" style="margin-top:20px;">
+    <div class="row q-my-xl">
       <q-card class="full-width" style="padding:10px;">
         <q-card-section style="padding:0;">
           <span class="card-title">Result</span>
