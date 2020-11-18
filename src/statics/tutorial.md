@@ -5,8 +5,8 @@ The tutorial guide above would be useful to get the overall concept of RealGraph
 RealGraph<sup>Web</sup> is a web-based platform that provides an interactive web-based interface, allowing users to access various graph analysis services by performing graph algorithms easily and conveniently anywhere on the web.
 Graph analysis services using RealGraph<sup>Web</sup> are performed in three steps: graph upload, algorithm execution, and result visualization & download steps (Fig. 1). In this section, we present how a user could analyze a graph on RealGraph<sup>Web</sup> by these three steps.
 
-![Architecture](./assets/RealGraphArchitecture.png =500x)
-![Performance](./assets/RealGraphPerformance.png =500x)
+![Architecture](http://realgraph.hanyang.ac.kr:20080/assets/RealGraphArchitecture.png =500x)
+![Performance](http://realgraph.hanyang.ac.kr:20080/assets/RealGraphPerformance.png =500x)
 
 # Overview of RealGraph
 Conference name: The World Wide Web Conference 2019
