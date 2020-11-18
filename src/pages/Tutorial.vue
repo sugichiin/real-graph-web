@@ -16,7 +16,7 @@
     </div>
 
     <div class="tutorial q-mb-lg">
-      <img src="~/assets/RealGraphPerformance.png" alt="performance" style="max-width: 800px; width: 80%;">
+      <img src="~/assets/RealGraphPerformance.png" alt="performance" style="width: 90%;">
     </div>
 
     <hr>
@@ -24,7 +24,7 @@
     <div class="markdown">
       <h4 class="maintitle">RealGraph<sup>Web</sup></h4>
       <p class="content">
-        RealGraph<sup>Web</sup> is a web-based graph analysis service using [RealGraph](http://realgraph.hanyang.ac.kr:20080/).
+        RealGraph<sup>Web</sup> is a web-based graph analysis service using <a href="http://realgraph.hanyang.ac.kr:20080/">RealGraph</a>.
         <br>
         The tutorial guide below would be useful to get the overall concept of RealGraph<sup>Web</sup>.
       </p>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="tutorial q-my-lg">
-      <img src="~/assets/DemoDraft.png" alt="demo draft" style="max-width: 800px; width: 80%">
+      <img src="~/assets/DemoDraft.png" alt="demo draft" style="height: 90%">
     </div>
 
     <!-- Steps -->
