@@ -1,5 +1,6 @@
 <template>
-  <q-btn no-caps :color="color || 'cyan'" push align="left"
+  <q-btn style="font-size: 16px;"
+        no-caps :color="color || 'cyan'" push align="left"
          :icon="(selectedItem && (selectedItem.icon || selectedItem.parent.icon)) || defaultIcon" class="full-width" :label="(selectedItem && selectedItem.label) || 'Not selected'">
     <q-menu fit>
       <q-list>

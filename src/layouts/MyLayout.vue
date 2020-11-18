@@ -1,12 +1,12 @@
 <template>
   <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
     <div class="container">
-      <q-header elevated>
-        <div style="text-align:center;" class="q-my-lg">
+      <q-header reveal elevated class="bg-indigo">
+        <div style="text-align:center;" class="q-my-md">
           <img alt="Quasar logo" v-link="`/`" style="cursor:pointer;" width="350px" src="~assets/logo.png">
         </div>
 
-        <q-tabs v-model="tab">
+        <q-tabs>
           <q-tab name="tutorial" push v-link="`/`" label="Tutorial" icon="note"></q-tab>
           <q-tab name="upload" push v-link="`/upload`" label="Upload" icon="attachment"></q-tab>
           <q-tab name="execute" push v-link="`/execute`" label="Execute" icon="play_circle_filled"></q-tab>
@@ -26,6 +26,7 @@
 
 <script>
   export default {
+    name: 'MyLayout',
     data () {
       return {}
     }
@@ -34,8 +35,8 @@
 <style>
   .container {
     width: 100%;
-    padding-left: 18%;
-    padding-right: 18%;
+    padding-left: 20%;
+    padding-right: 20%;
   }
   .top-menu {
     padding-bottom:15px;

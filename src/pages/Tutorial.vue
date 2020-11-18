@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div class="tutorial">
+    <div class="tutorial q-pb-md">
       <iframe allowfullscreen="" frameborder="0" height="547"
               marginheight="0" marginwidth="0" scrolling="no" src="https://www.slideshare.net/slideshow/embed_code/key/9V8wZi2CqduhfB" width="900"></iframe>
     </div>

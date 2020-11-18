@@ -2,32 +2,40 @@
   <q-page padding>
     <!-- content -->
     <transition appear enter-active-class="animated fadeIn" leave-activie-class="animated fadeOut">
-      <div class="row">
-        <div class="col-9">
-          <label class="text-h5">
-            File Selection
-            <q-input @input="val => { file = val[0] }" class="full-width" type="file" filled></q-input>
-          </label>
-          <label class="text-h5">
-            Sample
-            <div class="row">
-              <div class="col-6">
-                <q-input filled style="margin-right:10px;" rows="20" readonly type="textarea" :value="sample"></q-input>
-              </div>
-              <div class="col-6">
-                <q-input filled style="margin-left:10px;" rows="20" readonly type="textarea" :value="example"></q-input>
-              </div>
+      <div class="col">
+          <div class="row">
+            <label class="text-h5 full-width">
+              Dataset Selection
+            </label>
+            <div class="col-6 q-mt-sm q-pr-lg">
+                <q-input @input="val => { file = val[0] }" type="file" standout="bg-indigo text-white"></q-input>
             </div>
-          </label>
-        </div>
-        <div class="col-3" style="padding-left:15px; padding-top:35px;">
-          <q-btn @click="upload" push class="full-width" style="margin-bottom:10px;" no-caps color="green"
-                 icon="play_arrow">Generate
-          </q-btn>
-          <a href="/sample/sample.txt" download>
-            <q-btn push class="full-width" no-caps color="grey" icon="get_app">Download Sample</q-btn>
-          </a>
-        </div>
+            <div class="col-3 q-mt-sm q-pr-sm">
+              <q-btn @click="upload" push no-caps color="teal-4" class="full-width q-py-sm"
+                    icon="play_arrow" size="lg">Generate
+              </q-btn>
+            </div>
+            <div class="col-3 q-mt-sm">
+              <a href="/sample/sample.txt" download>
+                <q-btn class="full-width q-py-sm" push no-caps color="grey" icon="get_app" size="lg">
+                  Download Sample File
+                </q-btn>
+              </a>
+            </div>
+          </div>
+          <div class="row q-mt-lg">
+            <label class="text-h5 full-width">
+              Sample
+              <div class="row q-mt-sm">
+                <div class="col-6 q-pr-md">
+                  <q-input class="q-mr-md" filled rows="20" readonly type="textarea" :value="sample"></q-input>
+                </div>
+                <div class="col-6">
+                  <q-input class="q-ml-md" filled rows="20" readonly type="textarea" :value="example"></q-input>
+                </div>
+              </div>
+            </label>
+          </div>
       </div>
     </transition>
     <q-inner-loading :showing="state !== 'ready' && state !== 'success'">
