@@ -7,7 +7,7 @@
         </div>
 
         <q-tabs>
-          <q-tab name="tutorial" push v-link="`/`" label="Tutorial" icon="note"></q-tab>
+          <q-tab name="tutorial" push v-link="`/`" label="Overview" icon="note"></q-tab>
           <q-tab name="upload" push v-link="`/upload`" label="Upload" icon="attachment"></q-tab>
           <q-tab name="execute" push v-link="`/execute`" label="Execute" icon="play_circle_filled"></q-tab>
         </q-tabs>
