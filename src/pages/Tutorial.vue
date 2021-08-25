@@ -24,20 +24,22 @@
     <div class="markdown">
       <h4 class="maintitle">RealGraph<sup>Web</sup></h4>
       <p class="content">
-        RealGraph<sup>Web</sup> is a web-based graph analysis service using <a href="http://realgraph.hanyang.ac.kr:20080/">RealGraph</a>.
+        RealGraph<sup>Web</sup> is a web-based platform that provides an interactive web-based interface,
         <br>
-        The tutorial guide below would be useful to get the overall concept of RealGraph<sup>Web</sup>.
+        allowing users to access various graph analysis services by performing graph algorithms easily and conveniently anywhere on the web (http://realgraph.hanyang.ac.kr:20080/).
+        <br>
       </p>
       <p class="content">
-        RealGraph<sup>Web</sup> is a web-based platform that provides an interactive web-based interface, allowing users to access various graph analysis services by performing graph algorithms easily and conveniently anywhere on the web.
+        RealGraph<sup>Web</sup> provides a web-based graph analysis service using <a href="https://dl.acm.org/doi/10.1145/3308558.3313434">RealGraph</a>,
+        <br>
+        a high-performance single-machine-based graph engine to efficiently analyze real-world big graphs.
         <br>
       </p>
       <p class="content">
         Graph analysis services using RealGraph<sup>Web</sup> are performed in three steps:
         <br>
-        1) <strong>graph upload</strong>, 2) <strong>algorithm execution</strong>, and 3) <strong>result visualization & download steps</strong> (Fig. 1).
-        <br>
-        In this section, we present how a user could analyze a graph on RealGraph<sup>Web</sup> by these three steps.
+        1) <strong>graph upload</strong>, 2) <strong>algorithm execution</strong>, and 3) <strong>result visualization & download steps</strong>.
+        <br><br>
       </p>
     </div>
 
@@ -54,7 +56,7 @@
 
       <h6 class="subtitle">2) Algorithm execution</h6>
       <p class="content">
-        Fig. 1-(a)$\sim$(d) show the substeps of an algorithm execution step. The server provides a list of graphs already stored in RealGraph<sup>Web</sup>, among which a user selects her target for analysis (Fig. 1-(a)). The user sees the characteristics of the graph, such as numbers of nodes and edges, density, file size, etc. The server provides various graph algorithms commonly implemented in many graph engines, such as Outdegree/Indegree distribution, breadth first search (BFS), PageRank, and weakly connected component (WCC).
+        Fig. 1-(a)~(d) show the substeps of an algorithm execution step. The server provides a list of graphs already stored in RealGraph<sup>Web</sup>, among which a user selects her target for analysis (Fig. 1-(a)). The user sees the characteristics of the graph, such as numbers of nodes and edges, density, file size, etc. The server provides various graph algorithms commonly implemented in many graph engines, such as Outdegree/Indegree distribution, breadth first search (BFS), PageRank, and weakly connected component (WCC).
 It also provides various additional graph algorithms, such as betweenness centrality (BC), hypertext induced topic selection (HITS), single source shortest path (SSSP), and random walk with restart (RWR).
 and community detection (CD), among which a user selects one for her analysis (Fig. 1-(b)). Each algorithm has its own parameters: for instance, BFS requires the starting node while PageRank does the number of iterations. A user sets parameters as the values she wants (Fig. 1-(c)). Then, she requests the execution of the algorithm on the graph (Fig. 1-(d)).
 She can recognize the effect of the techniques uniquely employed in RealGraph by selecting the options of whether it runs with or without each technique.
@@ -82,7 +84,7 @@ The server stores the result and the elapsed time of algorithm execution in a bi
     </div>
     <div class="tutorial q-py-md">
       <iframe allowfullscreen="" frameborder="0" height="547"
-              marginheight="0" marginwidth="0" scrolling="no" src="https://www.slideshare.net/slideshow/embed_code/key/9V8wZi2CqduhfB" width="900"></iframe>
+              marginheight="0" marginwidth="0" scrolling="no" src="https://www.slideshare.net/slideshow/embed_code/key/wnVB2gwUIQezB4" width="900"></iframe>
     </div>
     <div class="markdown">
       <h6 class="subtitle">Installation guide (Not supported yet)</h6>

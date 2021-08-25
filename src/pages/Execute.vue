@@ -94,7 +94,7 @@
             <q-separator key="separator"></q-separator>
             <div class="text-center" style="margin-top:10px;" v-if="(tabs === 'text' || tabs === 'table') && algoItem && state === 'success'">
               <span class="text-h5" v-if="algoItem.parent.label === 'Rank'">
-                Top-{{count}} {{this.algoItem.label}} of {{this.dataset}} Dataset
+                Top-40{{count}} {{this.algoItem.label}} of {{this.dataset}} Dataset
               </span>
               <span class="text-h5" v-if="algoItem.parent.label !== 'Rank'">
                 The {{this.algoItem.label}} result of {{this.dataset}} Dataset
